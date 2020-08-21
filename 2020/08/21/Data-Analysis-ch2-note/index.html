@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Data_Analysis_ch2_note - 憩程</title><meta description="本文为Datawhale8月组队学习——动手学数据分析课程的系列学习笔记(2)。"><meta property="og:type" content="blog"><meta property="og:title" content="Data_Analysis_ch2_note"><meta property="og:url" content="http://yoursite.com/2020/08/21/Data-Analysis-ch2-note/"><meta property="og:site_name" content="憩程"><meta property="og:description" content="本文为Datawhale8月组队学习——动手学数据分析课程的系列学习笔记(2)。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://yoursite.com/img/og_image.png"><meta property="article:published_time" content="2020-08-21T15:14:00.000Z"><meta property="article:modified_time" content="2020-08-21T15:16:21.444Z"><meta property="article:author" content="qcbegin"><meta property="article:tag" content="data_analysis"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/08/21/Data-Analysis-ch2-note/"},"headline":"憩程","image":["http://yoursite.com/img/og_image.png"],"datePublished":"2020-08-21T15:14:00.000Z","dateModified":"2020-08-21T15:16:21.444Z","author":{"@type":"Person","name":"qcbegin"},"description":"本文为Datawhale8月组队学习——动手学数据分析课程的系列学习笔记(2)。"}</script><link rel="canonical" href="http://yoursite.com/2020/08/21/Data-Analysis-ch2-note/"><link rel="icon" href="/img/qcbegin_favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.0.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/qcbegin_logo.svg" alt="憩程" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-21T15:14:00.000Z" title="2020-08-21T15:14:00.000Z">2020-08-21</time>发表</span><span class="level-item"><time dateTime="2020-08-21T15:16:21.444Z" title="2020-08-21T15:16:21.444Z">2020-08-21</time>更新</span><span class="level-item">10 分钟读完 (大约1559个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Data_Analysis_ch2_note</h1><div class="content"><p>本文为Datawhale8月组队学习——动手学数据分析课程的系列学习笔记。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">Datawhale-动手学数据分析</a></p>
+<h2 id="数据来源"><a href="#数据来源" class="headerlink" title="数据来源"></a>数据来源</h2><p>Kaggle小白入门首选练手项目——<a target="_blank" rel="noopener" href="https://www.kaggle.com/c/titanic/data">Kaggle-泰坦尼克号存活率</a></p>
+<h2 id="Ch2-数据预处理与可视化"><a href="#Ch2-数据预处理与可视化" class="headerlink" title="Ch2 数据预处理与可视化"></a>Ch2 数据预处理与可视化</h2><h3 id="Ch2-1-数据清洗及特征处理"><a href="#Ch2-1-数据清洗及特征处理" class="headerlink" title="Ch2-1 数据清洗及特征处理"></a>Ch2-1 数据清洗及特征处理</h3><h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3><p>缺失值表现在数据集中，有以下几种形式</p>
+<ul>
+<li>NaN</li>
+<li>None</li>
+<li>NA：date类型</li>
+<li>误输入无意义值</li>
+</ul>
+<p>一般对于使用IO方法读入的数据中的空值，pandas默认会将其转化为NaN，NaN属于float类型的数据，与None不同，None属于Object类型。</p>
+<blockquote>
+<p><strong>坑：</strong></p>
+<p><strong>NaN != NaN</strong></p>
+<p>因此，对于NaN的检测，可以使用<code>isnan()</code>进行</p>
+</blockquote>
+<h4 id="缺失值检测"><a href="#缺失值检测" class="headerlink" title="缺失值检测"></a>缺失值检测</h4><ul>
+<li>isnull</li>
+<li>info</li>
+</ul>
+<blockquote>
+<p>any()和all()</p>
+</blockquote>
+<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><ul>
+<li>删除：以<code>dropna</code>为代表</li>
+<li>填补：以<code>fillna</code>为代表</li>
+</ul>
+<h3 id="数据去重"><a href="#数据去重" class="headerlink" title="数据去重"></a>数据去重</h3><p>重复值的处理主要用到两个方法：<code>duplicated()</code>与<code>drop_duplicates()</code></p>
+<h3 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h3><h4 id="数据分箱"><a href="#数据分箱" class="headerlink" title="数据分箱"></a>数据分箱</h4><p>数据分箱，是一种数据预处理技术，用于减少次要观察误差的影响，是一种将多个连续值分组为较少数量的「分箱」方法。</p>
+<p>此外，一般在建立分类模型时，需要对连续变量离散化，特征离散化后，模型会更稳定，降低了模型过拟合的风险。</p>
+<p>分箱可以基于自定义划分的区间，也可以基于分位点。</p>
+<p>在Python中，主要用到两种静态方法：<code>pd.cut()</code>和<code>pd.qcut()</code></p>
+<ul>
+<li>cut()：按值切割，即根据数据值的大小范围等分成n组，落入这个范围的分别进入到该组。</li>
+<li>qcut()：等频切割，即基本保证每个组里的元素个数是相等的。</li>
+</ul>
+<blockquote>
+<p>二者都含有<code>label</code>参数，用于产生分类后的类别标签</p>
+</blockquote>
+<h4 id="特征编码"><a href="#特征编码" class="headerlink" title="特征编码"></a>特征编码</h4><p>数据分析前，除了将连续数据离散化，往往还需将类别特征转换为数值特征以方便后续的建模分析，因此需要对其进行编码。</p>
+<p>常见的特征编码形式包括：<strong>标签编码（Label Encoding）</strong>与<strong>独热编码（One Hot Encoding）</strong></p>
+<h5 id="标签编码（Label-Encoding）"><a href="#标签编码（Label-Encoding）" class="headerlink" title="标签编码（Label Encoding）"></a>标签编码（Label Encoding）</h5><p>数字化编码即给特征的不同值赋予不同的数字标签（对类别变量中每一类别赋一数值），一般从0或1开始编码。</p>
+<p>如：</p>
+<table>
+<thead>
+<tr>
+<th>原文本特征值</th>
+<th>标签编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>0</td>
+</tr>
+<tr>
+<td>C</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>这种编码方式往往适用于类别间具有排序逻辑关系的数据（如：高、中、低），这种编码方式就保留了其中的大小关系。</p>
+<p>而对于没有大小关系的特征，这样的编码无形之中给该特征添加了大小关系（如：S&lt;C&lt;Q），再例如将[dog,cat,dog,mouse,cat]转换为[1,2,1,3,2]。对于不同机器学习模型来说，这里无形之间附加了新的信息——dog和mouse的平均值是cat。这会干扰模型的学习，影响模型的预测。</p>
+<p>具体代码实现可以借助：</p>
+<ul>
+<li>replace()：</li>
+<li>map()</li>
+<li>sklearn库中的LabelEncoder类</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Label Encoding</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 01 replace</span></span><br><span class="line">train[<span class="string">&#x27;Sex_num&#x27;</span>] = train[<span class="string">&#x27;Sex&#x27;</span>].replace(&#123;<span class="string">&#x27;male&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;female&#x27;</span>:<span class="number">2</span>&#125;)</span><br><span class="line"><span class="comment"># 也可使用list</span></span><br><span class="line"><span class="comment"># train[&#x27;Sex&#x27;].replace([&#x27;male&#x27;,&#x27;female&#x27;],[1,2])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 02 map</span></span><br><span class="line">cabins = dict(zip(train[<span class="string">&#x27;Cabin&#x27;</span>].unique(),range(<span class="number">1</span>,train[<span class="string">&#x27;Cabin&#x27;</span>].nunique())))  <span class="comment"># 建立一个映射字典</span></span><br><span class="line">train[<span class="string">&#x27;Cabin_num&#x27;</span>] = train[<span class="string">&#x27;Cabin&#x27;</span>].map(cabins)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 03 LabelEncoder</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line">lbe = preprocessing.LabelEncoder()</span><br><span class="line"><span class="comment">#lbe.fit_transform(train[&#x27;Embarked&#x27;]) # 错误，embarked列中含有非string数据</span></span><br><span class="line"><span class="comment"># 默认0开始编码，fit_transform可以拆成fit和transform,sklearn中都要先fit</span></span><br><span class="line">train[<span class="string">&#x27;Embarked_num&#x27;</span>]=lbe.fit_transform(train[<span class="string">&#x27;Embarked&#x27;</span>].astype(str)) </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>sklearn库中的preprocessing提供了数据预处理需要用到的很多工具。该库往往需要先建立一个算法的对象，拟合<code>fit()</code>后，再进行预测<code>predict()</code>或转换<code>transform()</code>。</p>
+</blockquote>
+<h5 id="独热编码（One-Hot-Encoding）"><a href="#独热编码（One-Hot-Encoding）" class="headerlink" title="独热编码（One Hot Encoding）"></a>独热编码（One Hot Encoding）</h5><blockquote>
+<p>独热编码即 One-Hot 编码，又称一位有效编码，其方法是使用N位状态寄存器来对N个状态进行编码，每个状态都由他独立的寄存器位，并且在任意时候，其中只有一位有效。</p>
+</blockquote>
+<p>这种编码方式为每个整数值都创建了一个二值数组，即0/1数组。对于每个特征，如果它有m个可能值，那么经过独热编码后，就变成了m个二元特征（如登船甲板这个特征有S、C、Q变成one-hot就是100, 010, 001）。并且，这些特征互斥，每次只有一个激活值（只含有一个1）。因此，数据会变成稀疏的。</p>
+<table>
+<thead>
+<tr>
+<th>原文本特征值</th>
+<th>标签编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>100</td>
+</tr>
+<tr>
+<td>C</td>
+<td>010</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>001</td>
+</tr>
+</tbody></table>
+<p><strong>优点：</strong></p>
+<ul>
+<li>在回归、分类、聚类等机器学习算法中，往往需要计算特征之间的距离或相似度，这种计算往往基于欧式空间。One-hot编码将离散特征的取值扩展到了欧式空间，离散特征的某个取值对应欧式空间的某个点，这使得特征之间的距离计算更加合理。</li>
+<li>扩充了特征空间</li>
+<li>解决了标签编码附加大小关系的问题</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>当类别很多时，特征空间会变得非常大，增加了计算量，在这种情况下，一般可以用PCA来减少维度。</li>
+</ul>
+<blockquote>
+<p>独热编码可能会产生完全共线性问题。共线性问题可以在后续的相关性分析中解决（对相关系数过大特征予以处理）。</p>
+</blockquote>
+<p>具体代码实现可以借助：</p>
+<ul>
+<li>pandas自带的get_dummies静态方法：可以设置<code>prefix</code>参数，即生成编码DataFrame中列名（特征名）前缀</li>
+<li>sklearn库中的OneHotEncoder类：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## One Hot Encoding</span></span><br><span class="line"><span class="comment"># 01 OneHotEncoder</span></span><br><span class="line">ohe = preprocessing.OneHotEncoder()</span><br><span class="line">embark_oh = ohe.fit_transform(train[<span class="string">&#x27;Embarked&#x27;</span>].astype(str).values.reshape(<span class="number">-1</span>,<span class="number">1</span>)).toarray()  <span class="comment"># .values.reshape(-1,1)是为了fit_transform函数输入为ndarray</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 02 get_dummies()</span></span><br><span class="line">cabin_oh = pd.get_dummies(train[<span class="string">&#x27;Cabin&#x27;</span>],prefix=<span class="string">&#x27;Cabin&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>fit_transform()</code>方法相当于同时进行拟合<code>fit()</code>和转化/预测<code>transform()</code>，其要求输入的变量为String组成的ndarray，否则会报错。</p>
+<p><code>reshape(-1，1)</code>的作用是将Series转化为ndarray。</p>
+</blockquote>
+<h4 id="文本提取"><a href="#文本提取" class="headerlink" title="文本提取"></a>文本提取</h4><p>在数据集中，文本类数据往往并非所有都是有效信息，需要通过类似爬虫用到的文本处理方法来提取其中的有效信息。</p>
+<p>在pandas中，可以使用<code>Series.str.extract()</code>方法结合正则表达式提取字符串类型数据中的有效信息。</p>
+<p>正则表达式的书写可以参考<a target="_blank" rel="noopener" href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md">Learn Regex The Easy Way</a>，可以配合<a target="_blank" rel="noopener" href="https://tool.oschina.net/regex/">正则表达式测试工具</a>使用。</p>
+</div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/data-analysis/">data_analysis</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/08/20/Data-Analysis-ch1-note/"><span class="level-item">Data_Analysis_ch1_note</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "708ea5c0a35a961bab879e5d05974591",
+            repo: "git@github.com:qcbegin/blog_comments.git",
+            owner: "qcbegin",
+            clientID: "b0a12e1b6772c451be08",
+            clientSecret: "983ad49cc0221f2f0a152d9ac50d46f10d83dbff",
+            admin: ["qcbegin"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar1.jpg" alt="qcbegin"></figure><p class="title is-size-4 is-block line-height-inherit">qcbegin</p><p class="is-size-6 is-block">投入其中 不必因果</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">2</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/qcbegin" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/qcbegin"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="订阅"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-08-21T15:14:00.000Z">2020-08-21</time></p><p class="title is-6"><a class="link-muted" href="/2020/08/21/Data-Analysis-ch2-note/">Data_Analysis_ch2_note</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-08-20T04:17:31.000Z">2020-08-20</time></p><p class="title is-6"><a class="link-muted" href="/2020/08/20/Data-Analysis-ch1-note/">Data_Analysis_ch1_note</a></p><p class="is-uppercase"></p></div></article><article class="media"><a class="media-left" href="/2020/03/30/algorithm-learning-experiences/"><p class="image is-64x64"><img class="thumbnail" src="https://gitee.com/qcbegin/embedded-image/raw/master/img/推文封面_1.jpg" alt="算法入门布满荆棘？这份小白学习心得你值得看看"></p></a><div class="media-content size-small"><p><time dateTime="2020-03-30T12:00:00.000Z">2020-03-30</time></p><p class="title is-6"><a class="link-muted" href="/2020/03/30/algorithm-learning-experiences/">算法入门布满荆棘？这份小白学习心得你值得看看</a></p><p class="is-uppercase"></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/data-analysis/"><span class="tag">data_analysis</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97/"><span class="tag">学习心得</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/qcbegin_logo.svg" alt="憩程" height="28"></a><p class="size-small"><span>&copy; 2020 qcbegin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
