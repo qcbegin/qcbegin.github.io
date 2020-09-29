@@ -10762,6 +10762,7 @@ body > .section {
 }
 article.media .media-content {
   color: #7a7a7a;
+  margin: auto;
 }
 article.media .media-content .title {
   margin: 0;

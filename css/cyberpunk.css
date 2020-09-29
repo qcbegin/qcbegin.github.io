@@ -10763,6 +10763,7 @@ body > .section {
 }
 article.media .media-content {
   color: #848484;
+  margin: auto;
 }
 article.media .media-content .title {
   margin: 0;
