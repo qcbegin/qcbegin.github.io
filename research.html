@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research · Xinyu Li</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.jpg" alt="Xinyu Li">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html" class="active">Research</a></li>
+        <li><a href="misc.html">Misc</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page">
+
+    <header class="page-header">
+      <p class="eyebrow">Academic Work</p>
+      <h1>Research</h1>
+    </header>
+
+    <p class="research-tagline">How technical advances, digital infrastructure, and organizational settings jointly shape how individuals produce, explore, and innovate in open digital environments.</p>
+
+    <div class="divider"><span>Publications &amp; Accepted Papers</span></div>
+
+    <article class="paper-card card">
+  <p class="paper-venue">Marketing Letters · 2025</p>
+  <h2 class="paper-title">Impacts of generative AI on user contributions: evidence from a coding Q&amp;A platform</h2>
+  <p class="paper-authors"><strong>Xinyu Li</strong>, Keongtae Kim</p>
+  <div class="paper-actions">
+    <button class="abstract-btn" aria-expanded="false"><span class="caret">&#9660;</span>&ensp;Abstract</button>
+    <a href="https://doi.org/10.1007/s11002-024-09747-1" class="paper-link" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+  <div class="abstract-text" role="region">
+    This study investigates the short-term impact of generative AI, exemplified by the introduction of ChatGPT, on user contributions in a coding Q&amp;A platform. We find that the introduction of ChatGPT led to a reduction in the number of high-quality answers provided by users, particularly among highly engaged contributors, despite an overall increase in answers. We identify two key mechanisms: (1) increased perceived question sophistication despite no actual change in content and (2) reduced motivation of loyal users in providing answers in the face of AI-generated alternatives. The findings suggest that while generative AI can facilitate value creation on user-generated content (UGC) platforms, it also poses challenges in retaining core contributors and managing content quality. The paper contributes to the literature on the impact of AI adoption on platforms and suggests practical implications for UGC platform management, such as the need for AI content disclosure measures to retain engaged users.
+  </div>
+</article>
+
+    <div class="divider"><span>Working Papers &amp; Work in Progress</span></div>
+
+    <article class="paper-card card">
+  <p class="paper-venue">2nd Round R&amp;R · Management Science</p>
+  <h2 class="paper-title">Assessing Open Source Software Developer’s Opportunity Costs in a Time of Generative AI</h2>
+  <p class="paper-authors"><strong>Xinyu Li</strong>, Francis Joseph Costello, Keongtae Kim, Xiaoquan (Michael) Zhang</p>
+  <div class="paper-actions">
+    <button class="abstract-btn" aria-expanded="false"><span class="caret">&#9660;</span>&ensp;Abstract</button>
+    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5100609" class="paper-link" target="_blank" rel="noopener">SSRN ↗</a>
+  </div>
+  <div class="abstract-text" role="region">
+    Recent advancements in generative artificial intelligence (AI) have paved the way for tools that can automate knowledge work, with open source software (OSS) development seeing an influx of AI-based tools for code automation and feedback. These AI tools have shown promise in increasing productivity. However, less is known about how developers’ technical activities have changed and whether AI-augmented OSS development yields personal career benefits. We leverage the March 2023 release of GitHub Copilot X as a natural experiment, analyzing a 25-week panel dataset of 1,373 GitHub developers through difference-in-differences with coarsened exact matching. Furthermore, we augment our GitHub data with individual LinkedIn career trajectories over 6–12 months post-treatment. We find that developers engage in “cognitive arbitrage,” experiencing lowered cognitive and time opportunity costs in development activities, enabling increased sustained and exploratory development of more varied coding activities. Additionally, heterogeneous analysis found that casual developers utilized AI more to reduce opportunity costs. Interestingly, this enhanced development activity translated into increased short to medium-term career benefits for all developers. Overall, our research suggests that generative AI fundamentally alters the open innovation equation by removing human cognitive barriers, allowing developers to assume more creative roles while simultaneously accelerating their career advancement opportunities.
+  </div>
+</article>
+
+    <article class="paper-card card">
+  <h2 class="paper-title">Open Boundaries, Quiet Withdrawals: How Cross-Ecosystem Interoperability Reshapes Open-Source AI Ecosystems</h2>
+  <p class="paper-authors"><strong>Xinyu Li</strong>, Miaozhe Han</p>
+</article>
+
+    <article class="paper-card card">
+  <h2 class="paper-title">Startup Adoption of AI Services and Its Consequences</h2>
+  <p class="paper-authors"><strong>Xinyu Li</strong>, Wen Wen, Keongtae Kim</p>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    Xinyu Li &nbsp;&middot;&nbsp; CUHK Business School &nbsp;&middot;&nbsp; Hong Kong
+  </footer>
+
+  <script>
+    document.querySelectorAll('.abstract-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const open = btn.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        btn.closest('.paper-card').querySelector('.abstract-text').classList.toggle('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

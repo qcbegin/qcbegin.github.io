@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misc · Xinyu Li</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.jpg" alt="Xinyu Li">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="misc.html" class="active">Misc</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page">
+
+    <header class="page-header">
+      <p class="eyebrow">Beyond the Desk</p>
+      <h1>Misc</h1>
+    </header>
+
+    <p class="misc-intro">Outside the office, I spend much of my time moving through landscapes that require more than a laptop. I jog, hike, climb, and trail-run — drawn to the kind of terrain where elevation and effort are the only metrics that matter. Some of the places I have been lucky enough to reach: Yubeng Village beneath the Meili Snow Mountain, the length of Tiger Leaping Gorge, the old streets of Kashgar, and all ten sections of the MacLehose Trail across Hong Kong. Feel free to reach out if you share the same impulse to just start walking.</p>
+
+    <div class="photo-grid">
+
+      <div class="photo-item">
+        <img src="assets/kashgar-baisha_lake.jpeg" alt="Baisha Lake, Xinjiang" loading="lazy">
+        <div class="photo-caption">
+          <span class="place">Baisha Lake</span>
+          <span class="region">Kashgar · Xinjiang</span>
+        </div>
+      </div>
+
+      <div class="photo-item">
+        <img src="assets/kashgar-muztagata.jpeg" alt="Muztagh Ata, Xinjiang" loading="lazy">
+        <div class="photo-caption">
+          <span class="place">Muztagh Ata</span>
+          <span class="region">Xinjiang · 7,546 m</span>
+        </div>
+      </div>
+
+      <div class="photo-item">
+        <img src="assets/yubeng-2.jpeg" alt="Yubeng trail, Yunnan" loading="lazy">
+        <div class="photo-caption">
+          <span class="place">Yubeng</span>
+          <span class="region">Yunnan · On the trail</span>
+        </div>
+      </div>
+
+      <div class="photo-item">
+        <img src="assets/yubeng-3.JPG" alt="Yubeng Village, Yunnan" loading="lazy">
+        <div class="photo-caption">
+          <span class="place">Yubeng Village</span>
+          <span class="region">Yunnan · Meili Snow Mountain</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"><span>Trails Walked</span></div>
+
+    <div class="trail-map-wrap card">
+      <div id="trail-map"></div>
+    </div>
+    <p class="map-note">Pins mark where I&rsquo;ve been; lines trace the routes I walked. Scroll-zoom is off &mdash; drag to pan, use the&nbsp;+&nbsp;/&nbsp;&minus; buttons to zoom.</p>
+
+  </main>
+  <footer class="site-footer">
+    Xinyu Li &nbsp;&middot;&nbsp; CUHK Business School &nbsp;&middot;&nbsp; Hong Kong
+  </footer>
+
+  <script>
+  window.addEventListener("load", function () {
+    const TRAILS = [{"name": "Yubeng Trek", "region": "Yunnan \u00b7 Meili Snow Mountain", "lat": 28.434, "lon": 98.801, "gpx": null}, {"name": "Tiger Leaping Gorge", "region": "Yunnan \u00b7 Upper trail", "lat": 27.193, "lon": 100.11, "gpx": null}, {"name": "Muztagh Ata / Kashgar", "region": "Xinjiang \u00b7 Karakoram", "lat": 38.47, "lon": 75.19, "gpx": null}, {"name": "MacLehose Trail", "region": "Hong Kong \u00b7 Sections 1\u201310", "lat": 22.424, "lon": 114.22, "gpx": null}];
+    const ACCENT = "#C8102E";
+    if (!window.L) return;
+
+    const map = L.map("trail-map", {
+      scrollWheelZoom: false,
+      attributionControl: true,
+    });
+
+    // Muted light basemap (CARTO Positron) — fits the cream palette
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      { maxZoom: 19, subdomains: "abcd",
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' }
+    ).addTo(map);
+
+    const dot = L.divIcon({ className: "trail-dot",
+      iconSize: [14, 14], iconAnchor: [7, 7], popupAnchor: [0, -8] });
+
+    let bounds = L.latLngBounds([]);
+    function fit() { if (bounds.isValid()) map.fitBounds(bounds, { padding: [40, 40], maxZoom: 9 }); }
+
+    function addPin(t) {
+      if (t.lat == null) return;
+      L.marker([t.lat, t.lon], { icon: dot }).addTo(map)
+        .bindPopup("<b>" + t.name + "</b><br>" + (t.region || ""));
+      bounds.extend([t.lat, t.lon]);
+    }
+
+    TRAILS.forEach(function (t) {
+      addPin(t);                       // always show a labeled pin
+      if (t.gpx) {                     // overlay the real route if present
+        new L.GPX(t.gpx, {
+          async: true,
+          polyline_options: { color: ACCENT, weight: 4, opacity: 0.85 },
+          marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null },
+        })
+        .on("loaded", function (e) { bounds.extend(e.target.getBounds()); fit(); })
+        .addTo(map);
+      }
+    });
+
+    fit();
+    if (!bounds.isValid()) map.setView([30, 95], 3);
+  });
+  </script>
+
+</body>
+</html>
