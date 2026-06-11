@@ -171,11 +171,17 @@ CONTENT = {
         {"src": "assets/kashgar-baisha_lake.jpeg", "alt": "Baisha Lake, Xinjiang",
          "place": "Baisha Lake",    "region": "Kashgar · Xinjiang"},
         {"src": "assets/kashgar-muztagata.jpeg",   "alt": "Muztagh Ata, Xinjiang",
-         "place": "Muztagh Ata",    "region": "Xinjiang · 7,546 m"},
+         "place": "Muztagh Ata",    "region": "Xinjiang · 4,688 m"},
+        {"src": "assets/maclehose-4.JPG",             "alt": "MacLehose Trail, Hong Kong",
+            "place": "MacLehose Trail", "region": "Hong Kong · Section 4"},
+        {"src": "assets/maclehose-po-pin-chau.jpeg", "alt": "Po Pin Chau, Hong Kong",
+            "place": "Po Pin Chau", "region": "Hong Kong · Sai Kung"},
+        {"src": "assets/yubeng-1.JPG", "alt": "Yubeng Village, Yunnan",
+         "place": "Ice Cave", "region": "Yunnan · Sacred Waterfall Trail"},
         {"src": "assets/yubeng-2.jpeg",            "alt": "Yubeng trail, Yunnan",
-         "place": "Yubeng",         "region": "Yunnan · On the trail"},
+         "place": "Yubeng Village",         "region": "Yunnan · On the trail"},
         {"src": "assets/yubeng-3.JPG",             "alt": "Yubeng Village, Yunnan",
-         "place": "Yubeng Village", "region": "Yunnan · Meili Snow Mountain"},
+         "place": "Yubeng Village", "region": "Yunnan · Meili Snow Mountain"}
     ],
 
     # ── Trail map (Leaflet + GPX) ─────────────────────────────────────────────
@@ -200,6 +206,22 @@ CONTENT = {
          "lat": 38.470, "lon": 75.190, "gpx": None},
         {"name": "MacLehose Trail",    "region": "Hong Kong · Sections 1–10",
          "lat": 22.424, "lon": 114.220, "gpx": None},
+        {"name": "三清山 (Mt. Sanqingshan)", "region": "Jiangxi",
+         "lat": 28.915, "lon": 118.064, "gpx": None},
+        {"name": "千八线 (Qianba Trail)", "region": "Zhejiang · Longquan",
+         "lat": 28.074, "lon": 119.141, "gpx": None},
+        {"name": "武功山 (Mt. Wugong)", "region": "Jiangxi",
+         "lat": 27.459, "lon": 114.150, "gpx": None},
+        {"name": "黄山 (Mt. Huangshan)", "region": "Anhui",
+         "lat": 30.137, "lon": 118.168, "gpx": None},
+        {"name": "莫干山 (Mt. Mogan)", "region": "Zhejiang · Huzhou",
+         "lat": 30.634, "lon": 119.870, "gpx": None},
+        {"name": "梧桐山 (Mt. Wutong)", "region": "Guangdong · Shenzhen",
+         "lat": 22.573, "lon": 114.193, "gpx": None},
+        {"name": "八仙岭 (Pat Sin Leng)", "region": "Hong Kong · New Territories",
+         "lat": 22.499, "lon": 114.186, "gpx": None},
+        {"name": "大东山 (Sunset Peak)", "region": "Hong Kong · Lantau Island",
+         "lat": 22.259, "lon": 113.964, "gpx": None},
     ],
 }
 
@@ -235,8 +257,8 @@ def _nav(active: str, c: dict) -> str:
     """Circular avatar logo on the left, page links on the right."""
     pages = [("index.html", "Home"), ("research.html", "Research"), ("misc.html", "Misc")]
     links = "\n".join(
-        f'        <li><a href="{href}"{" class=\"active\"" if name.lower() == active else ""}>'
-        f'{name}</a></li>'
+        '        <li><a href="{}"{}>{}</a></li>'.format(
+            href, ' class="active"' if name.lower() == active else '', name)
         for href, name in pages
     )
     return (
